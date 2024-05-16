@@ -16,8 +16,9 @@ async function returnColorSchema(arg) {
       name: "Color Scheme Generator",
       instructions,
       tools: [],
-      model: "gpt-4o"
-    });
+      model: "gpt-3.5-turbo",
+      response_format: { type: "json_object" }
+      });
     const thread = await openai.beta.threads.create();
   const message = await openai.beta.threads.messages.create(
       thread.id,
