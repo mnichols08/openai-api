@@ -10,6 +10,16 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+async function returnNewImage(prompt,colors) {
+  const response = await openai.images.generate({
+    model: "dall-e-3",
+    prompt: `Generate an image of a ${prompt} using the following colors: ${colors}`,
+    n: 1,
+    size: "1024x1024",
+  });
+  return response.data[0].url;
+}
+
 async function returnColorSchema(arg) { 
     const instructions = "Take a color or mood and return a color scheme in JSON format that represents the input well. Provide some information about why each color was picked as well";
     const assistant = await openai.beta.assistants.create({
@@ -50,6 +60,12 @@ async function returnColorSchema(arg) {
   }
 
 app.use(cors());
+
+app.get('/v49/t16/img:prompt/:colors', async (req, res) => {
+  const {prompt, colors} = req.params.arg;
+  const schema = await returnColorSchema(prompt, colors);
+  res.status(200).json( {schema} );   
+});
 
 app.get('/v1/colors/:arg', async (req, res) => {
     const arg = req.params.arg;
