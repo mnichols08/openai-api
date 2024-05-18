@@ -61,7 +61,7 @@ async function returnColorSchema(arg) {
 
 app.use(cors());
 
-app.get('/v49/t16/img:prompt/:colors', async (req, res) => {
+app.get('/v49/t16/img/:prompt/:colors', async (req, res) => {
   const {prompt, colors} = req.params.arg;
   const schema = await returnColorSchema(prompt, colors);
   res.status(200).json( {schema} );   
