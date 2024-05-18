@@ -61,10 +61,10 @@ async function returnColorSchema(arg) {
 
 app.use(cors());
 
-app.get('/v49/t16/img/:prompt/:colors', async (req, res) => {
-  const {prompt, colors} = req.params.arg;
-  const schema = await returnColorSchema(prompt, colors);
-  res.status(200).json( {schema} );   
+app.get('/v49/img/:prompt/:colors', async (req, res) => {
+  const {prompt, colors} = req.params;
+ const imgUrl = await returnNewImage(prompt,colors);
+  res.status(200).json( imgUrl );   
 });
 
 app.get('/v1/colors/:arg', async (req, res) => {
