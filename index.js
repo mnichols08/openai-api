@@ -15,7 +15,7 @@ async function returnNewImage(prompt,colors) {
     model: "dall-e-3",
     prompt: `Generate an image of a ${prompt} using the following colors: ${colors}`,
     n: 1,
-    size: "240x320",
+    size: "256x256",
   });
   return response.data[0].url;
 }
