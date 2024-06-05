@@ -12,7 +12,7 @@ const openai = new OpenAI({
 
 async function returnNewImage(prompt,colors) {
   const response = await openai.images.generate({
-    model: "dall-e-3",
+    model: "dall-e",
     prompt: `Generate an image of a ${prompt} using the following colors: ${colors}`,
     n: 1,
     size: "256x256",
